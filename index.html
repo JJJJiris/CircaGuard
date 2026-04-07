@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CircaGuard Web PPT</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="deck" id="deck">
+      <header class="topbar">
+        <div class="brand" id="brand">CircaGuard</div>
+        <div class="toolbar">
+          <button id="voiceBtn" type="button" title="语音讲解开关">语音：关</button>
+          <button id="langBtn" type="button" title="切换中英文">EN</button>
+          <button id="fullscreenBtn" type="button">全屏</button>
+          <button id="printBtn" type="button">导出PDF</button>
+          <div class="counter" id="counter">1 / 12</div>
+        </div>
+      </header>
+
+      <main class="slides" id="slides"></main>
+
+      <footer class="controls">
+        <button id="prevBtn" type="button" aria-label="上一页">← 上一页</button>
+        <div class="progress-wrap"><div id="progress"></div></div>
+        <button id="nextBtn" type="button" aria-label="下一页">下一页 →</button>
+      </footer>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
