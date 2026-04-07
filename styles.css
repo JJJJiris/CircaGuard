@@ -184,7 +184,7 @@ body::-webkit-scrollbar-thumb,
   position: absolute;
   inset: -2%;
   border-radius: inherit;
-  background: url("file:///Users/jj/.cursor/projects/Users-jj-cursor/assets/jimeng-2026-04-07-9717-________________________________________...-0a18259b-3553-4dd7-8a41-7072dfc80c45.png")
+  background: url("./assets/cover.png")
     center right / cover no-repeat;
   z-index: 1;
   transform-origin: 60% 46%;
