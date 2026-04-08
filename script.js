@@ -7,12 +7,22 @@ const printBtn = document.getElementById("printBtn");
 const fullscreenBtn = document.getElementById("fullscreenBtn");
 const langBtn = document.getElementById("langBtn");
 const voiceBtn = document.getElementById("voiceBtn");
+const voiceSettingsBtn = document.getElementById("voiceSettingsBtn");
 const videoBtn = document.getElementById("videoBtn");
 const videoModal = document.getElementById("videoModal");
 const videoBackdrop = document.getElementById("videoBackdrop");
 const closeVideoBtn = document.getElementById("closeVideoBtn");
 const projectVideo = document.getElementById("projectVideo");
 const videoTitle = document.getElementById("videoTitle");
+const voiceModal = document.getElementById("voiceModal");
+const voiceBackdrop = document.getElementById("voiceBackdrop");
+const closeVoiceBtn = document.getElementById("closeVoiceBtn");
+const voiceTitle = document.getElementById("voiceTitle");
+const zhVoiceSelect = document.getElementById("zhVoiceSelect");
+const enVoiceSelect = document.getElementById("enVoiceSelect");
+const previewVoiceBtn = document.getElementById("previewVoiceBtn");
+const resetVoiceBtn = document.getElementById("resetVoiceBtn");
+const voiceTip = document.getElementById("voiceTip");
 
 const deckContent = {
   zh: {
@@ -24,6 +34,14 @@ const deckContent = {
       video: "播放影片",
       closeVideo: "关闭",
       videoTitle: "项目影片",
+      voiceSettings: "语音设置",
+      closeVoice: "关闭",
+      voiceSettingsTitle: "语音设置",
+      previewVoice: "试听当前页",
+      resetVoice: "恢复自动推荐",
+      voiceTip: "建议优先选择包含 Siri / Neural / Enhanced 的语音，听感会更自然。",
+      zhVoiceLabel: "中文声音",
+      enVoiceLabel: "英文声音",
     },
     slides: [
       {
@@ -135,6 +153,14 @@ const deckContent = {
       video: "Play Video",
       closeVideo: "Close",
       videoTitle: "Project Video",
+      voiceSettings: "Voice Settings",
+      closeVoice: "Close",
+      voiceSettingsTitle: "Voice Settings",
+      previewVoice: "Preview Current Slide",
+      resetVoice: "Reset Auto Pick",
+      voiceTip: "Prefer voices containing Siri / Neural / Enhanced for a more natural tone.",
+      zhVoiceLabel: "Chinese Voice",
+      enVoiceLabel: "English Voice",
     },
     slides: [
       {
@@ -279,6 +305,11 @@ let voiceOn = false;
 const speechReady = "speechSynthesis" in window;
 let speechVoices = [];
 let speechQueueId = 0;
+const VOICE_PREF_KEY = "circaguard_voice_preferences_v1";
+const voicePreferences = {
+  zh: null,
+  en: null,
+};
 
 function itemList(items) {
   return `<ul class="reveal">${items.map((item) => `<li>${item}</li>`).join("")}</ul>`;
@@ -372,9 +403,18 @@ function mountSlides() {
   videoBtn.textContent = content.nav.video;
   closeVideoBtn.textContent = content.nav.closeVideo;
   videoTitle.textContent = content.nav.videoTitle;
+  voiceSettingsBtn.textContent = content.nav.voiceSettings;
+  closeVoiceBtn.textContent = content.nav.closeVoice;
+  voiceTitle.textContent = content.nav.voiceSettingsTitle;
+  previewVoiceBtn.textContent = content.nav.previewVoice;
+  resetVoiceBtn.textContent = content.nav.resetVoice;
+  voiceTip.textContent = content.nav.voiceTip;
+  document.querySelector("label[for='zhVoiceSelect']").textContent = content.nav.zhVoiceLabel;
+  document.querySelector("label[for='enVoiceSelect']").textContent = content.nav.enVoiceLabel;
   langBtn.textContent = lang === "zh" ? "EN" : "中";
   document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
   updateVoiceButton();
+  renderVoiceSelectOptions();
 }
 
 function render() {
@@ -415,6 +455,46 @@ voiceBtn.addEventListener("click", () => {
   }
 });
 
+voiceSettingsBtn.addEventListener("click", () => {
+  openVoiceModal();
+});
+
+closeVoiceBtn.addEventListener("click", () => {
+  closeVoiceModal();
+});
+
+voiceBackdrop.addEventListener("click", () => {
+  closeVoiceModal();
+});
+
+previewVoiceBtn.addEventListener("click", () => {
+  const previous = voiceOn;
+  voiceOn = true;
+  speakCurrentSlide();
+  voiceOn = previous;
+  updateVoiceButton();
+});
+
+resetVoiceBtn.addEventListener("click", () => {
+  voicePreferences.zh = null;
+  voicePreferences.en = null;
+  saveVoicePreferences();
+  renderVoiceSelectOptions();
+  if (voiceOn) speakCurrentSlide();
+});
+
+zhVoiceSelect.addEventListener("change", () => {
+  voicePreferences.zh = zhVoiceSelect.value || null;
+  saveVoicePreferences();
+  if (lang === "zh" && voiceOn) speakCurrentSlide();
+});
+
+enVoiceSelect.addEventListener("change", () => {
+  voicePreferences.en = enVoiceSelect.value || null;
+  saveVoicePreferences();
+  if (lang === "en" && voiceOn) speakCurrentSlide();
+});
+
 fullscreenBtn.addEventListener("click", () => {
   if (document.fullscreenElement) {
     document.exitFullscreen?.();
@@ -445,7 +525,7 @@ printBtn.addEventListener("click", () => {
 });
 
 window.addEventListener("keydown", (event) => {
-  if (isVideoModalOpen() && event.key !== "Escape") return;
+  if ((isVideoModalOpen() || isVoiceModalOpen()) && event.key !== "Escape") return;
   if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") {
     event.preventDefault();
     go(1);
@@ -471,19 +551,31 @@ window.addEventListener("keydown", (event) => {
   } else if (event.key.toLowerCase() === "m") {
     event.preventDefault();
     videoBtn.click();
+  } else if (event.key.toLowerCase() === "k") {
+    event.preventDefault();
+    voiceSettingsBtn.click();
   } else if (event.key === "Escape" && isVideoModalOpen()) {
     event.preventDefault();
     closeVideoModal();
+  } else if (event.key === "Escape" && isVoiceModalOpen()) {
+    event.preventDefault();
+    closeVoiceModal();
   }
 });
 
 function refreshVoices() {
   if (!speechReady) return;
   speechVoices = window.speechSynthesis.getVoices();
+  renderVoiceSelectOptions();
 }
 
 function pickVoice() {
   if (!speechVoices.length) return null;
+  const preferredURI = voicePreferences[lang];
+  if (preferredURI) {
+    const exact = speechVoices.find((voice) => voice.voiceURI === preferredURI);
+    if (exact) return exact;
+  }
   const allowedPrefixes = lang === "zh" ? ["zh-CN", "zh", "cmn"] : ["en-US", "en-GB", "en"];
   const candidates = speechVoices.filter((voice) =>
     allowedPrefixes.some((prefix) => voice.lang.toLowerCase().startsWith(prefix.toLowerCase()))
@@ -568,14 +660,20 @@ function updateVoiceButton() {
   if (lang === "zh") {
     voiceBtn.textContent = voiceOn ? "语音：开" : "语音：关";
     voiceBtn.title = "语音讲解开关（快捷键 V）";
+    voiceSettingsBtn.title = "语音设置（快捷键 K）";
   } else {
     voiceBtn.textContent = voiceOn ? "Voice: On" : "Voice: Off";
     voiceBtn.title = "Voice narration toggle (key V)";
+    voiceSettingsBtn.title = "Voice settings (key K)";
   }
 }
 
 function isVideoModalOpen() {
   return !videoModal.hasAttribute("hidden");
+}
+
+function isVoiceModalOpen() {
+  return !voiceModal.hasAttribute("hidden");
 }
 
 function openVideoModal() {
@@ -604,6 +702,73 @@ function closeVideoModal(options = {}) {
   }, 180);
 }
 
+function openVoiceModal() {
+  voiceModal.removeAttribute("hidden");
+  requestAnimationFrame(() => voiceModal.classList.add("show"));
+}
+
+function closeVoiceModal() {
+  voiceModal.classList.remove("show");
+  window.setTimeout(() => {
+    if (!voiceModal.classList.contains("show")) {
+      voiceModal.setAttribute("hidden", "");
+    }
+  }, 180);
+}
+
+function renderVoiceSelectOptions() {
+  if (!zhVoiceSelect || !enVoiceSelect) return;
+  const zhVoices = speechVoices.filter((voice) =>
+    ["zh-cn", "zh", "cmn"].some((prefix) => voice.lang.toLowerCase().startsWith(prefix))
+  );
+  const enVoices = speechVoices.filter((voice) =>
+    ["en-us", "en-gb", "en"].some((prefix) => voice.lang.toLowerCase().startsWith(prefix))
+  );
+
+  zhVoiceSelect.innerHTML = buildVoiceOptions(zhVoices, voicePreferences.zh);
+  enVoiceSelect.innerHTML = buildVoiceOptions(enVoices, voicePreferences.en);
+}
+
+function buildVoiceOptions(voices, selectedURI) {
+  const autoLabel = lang === "zh" ? "自动推荐" : "Auto";
+  const options = [`<option value="">${autoLabel}</option>`];
+  voices.forEach((voice) => {
+    const selected = selectedURI === voice.voiceURI ? " selected" : "";
+    options.push(
+      `<option value="${escapeHtml(voice.voiceURI)}"${selected}>${escapeHtml(
+        `${voice.name} (${voice.lang})`
+      )}</option>`
+    );
+  });
+  return options.join("");
+}
+
+function escapeHtml(text) {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function loadVoicePreferences() {
+  try {
+    const raw = localStorage.getItem(VOICE_PREF_KEY);
+    if (!raw) return;
+    const parsed = JSON.parse(raw);
+    voicePreferences.zh = typeof parsed.zh === "string" ? parsed.zh : null;
+    voicePreferences.en = typeof parsed.en === "string" ? parsed.en : null;
+  } catch (error) {
+    // Ignore corrupted local storage and keep defaults.
+  }
+}
+
+function saveVoicePreferences() {
+  localStorage.setItem(VOICE_PREF_KEY, JSON.stringify(voicePreferences));
+}
+
+loadVoicePreferences();
 refreshVoices();
 if (speechReady) {
   window.speechSynthesis.addEventListener("voiceschanged", refreshVoices);

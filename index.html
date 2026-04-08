@@ -12,6 +12,7 @@
         <div class="brand" id="brand">CircaGuard</div>
         <div class="toolbar">
           <button id="voiceBtn" type="button" title="语音讲解开关">语音：关</button>
+          <button id="voiceSettingsBtn" type="button" title="语音设置">语音设置</button>
           <button id="langBtn" type="button" title="切换中英文">EN</button>
           <button id="videoBtn" type="button">播放影片</button>
           <button id="fullscreenBtn" type="button">全屏</button>
@@ -40,6 +41,31 @@
           <source src="./assets/demo.mp4" type="video/mp4" />
           您的浏览器不支持视频播放，请更换浏览器重试。
         </video>
+      </div>
+    </div>
+
+    <div class="voice-modal" id="voiceModal" hidden>
+      <div class="voice-backdrop" id="voiceBackdrop"></div>
+      <div class="voice-panel" role="dialog" aria-modal="true" aria-labelledby="voiceTitle">
+        <div class="voice-head">
+          <h3 id="voiceTitle">语音设置</h3>
+          <button id="closeVoiceBtn" type="button" aria-label="关闭语音设置">关闭</button>
+        </div>
+        <div class="voice-body">
+          <label for="zhVoiceSelect">中文声音</label>
+          <select id="zhVoiceSelect"></select>
+
+          <label for="enVoiceSelect">英文声音</label>
+          <select id="enVoiceSelect"></select>
+
+          <div class="voice-actions">
+            <button id="previewVoiceBtn" type="button">试听当前页</button>
+            <button id="resetVoiceBtn" type="button">恢复自动推荐</button>
+          </div>
+          <p class="voice-tip" id="voiceTip">
+            建议优先选择包含 Siri / Neural / Enhanced 的语音，听感会更自然。
+          </p>
+        </div>
       </div>
     </div>
     <script src="./script.js"></script>
