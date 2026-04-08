@@ -7,10 +7,24 @@ const printBtn = document.getElementById("printBtn");
 const fullscreenBtn = document.getElementById("fullscreenBtn");
 const langBtn = document.getElementById("langBtn");
 const voiceBtn = document.getElementById("voiceBtn");
+const videoBtn = document.getElementById("videoBtn");
+const videoModal = document.getElementById("videoModal");
+const videoBackdrop = document.getElementById("videoBackdrop");
+const closeVideoBtn = document.getElementById("closeVideoBtn");
+const projectVideo = document.getElementById("projectVideo");
+const videoTitle = document.getElementById("videoTitle");
 
 const deckContent = {
   zh: {
-    nav: { prev: "← 上一页", next: "下一页 →", fullscreen: "全屏", print: "导出PDF" },
+    nav: {
+      prev: "← 上一页",
+      next: "下一页 →",
+      fullscreen: "全屏",
+      print: "导出PDF",
+      video: "播放影片",
+      closeVideo: "关闭",
+      videoTitle: "项目影片",
+    },
     slides: [
       {
         type: "cover",
@@ -113,7 +127,15 @@ const deckContent = {
     ],
   },
   en: {
-    nav: { prev: "← Previous", next: "Next →", fullscreen: "Fullscreen", print: "Export PDF" },
+    nav: {
+      prev: "← Previous",
+      next: "Next →",
+      fullscreen: "Fullscreen",
+      print: "Export PDF",
+      video: "Play Video",
+      closeVideo: "Close",
+      videoTitle: "Project Video",
+    },
     slides: [
       {
         type: "cover",
@@ -347,6 +369,9 @@ function mountSlides() {
   nextBtn.textContent = content.nav.next;
   fullscreenBtn.textContent = content.nav.fullscreen;
   printBtn.textContent = content.nav.print;
+  videoBtn.textContent = content.nav.video;
+  closeVideoBtn.textContent = content.nav.closeVideo;
+  videoTitle.textContent = content.nav.videoTitle;
   langBtn.textContent = lang === "zh" ? "EN" : "中";
   document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
   updateVoiceButton();
@@ -398,12 +423,25 @@ fullscreenBtn.addEventListener("click", () => {
   }
 });
 
+videoBtn.addEventListener("click", () => {
+  openVideoModal();
+});
+
+closeVideoBtn.addEventListener("click", () => {
+  closeVideoModal();
+});
+
+videoBackdrop.addEventListener("click", () => {
+  closeVideoModal();
+});
+
 printBtn.addEventListener("click", () => {
   stopNarration();
   window.print();
 });
 
 window.addEventListener("keydown", (event) => {
+  if (isVideoModalOpen() && event.key !== "Escape") return;
   if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") {
     event.preventDefault();
     go(1);
@@ -426,6 +464,12 @@ window.addEventListener("keydown", (event) => {
   } else if (event.key.toLowerCase() === "v") {
     event.preventDefault();
     voiceBtn.click();
+  } else if (event.key.toLowerCase() === "m") {
+    event.preventDefault();
+    videoBtn.click();
+  } else if (event.key === "Escape" && isVideoModalOpen()) {
+    event.preventDefault();
+    closeVideoModal();
   }
 });
 
@@ -524,6 +568,30 @@ function updateVoiceButton() {
     voiceBtn.textContent = voiceOn ? "Voice: On" : "Voice: Off";
     voiceBtn.title = "Voice narration toggle (key V)";
   }
+}
+
+function isVideoModalOpen() {
+  return !videoModal.hasAttribute("hidden");
+}
+
+function openVideoModal() {
+  stopNarration();
+  videoModal.removeAttribute("hidden");
+  requestAnimationFrame(() => videoModal.classList.add("show"));
+  const playPromise = projectVideo.play();
+  if (playPromise && typeof playPromise.catch === "function") {
+    playPromise.catch(() => {});
+  }
+}
+
+function closeVideoModal() {
+  videoModal.classList.remove("show");
+  projectVideo.pause();
+  window.setTimeout(() => {
+    if (!videoModal.classList.contains("show")) {
+      videoModal.setAttribute("hidden", "");
+    }
+  }, 180);
 }
 
 refreshVoices();
