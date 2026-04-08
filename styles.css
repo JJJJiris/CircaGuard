@@ -448,6 +448,10 @@ button:disabled {
   place-items: center;
 }
 
+.video-modal[hidden] {
+  display: none !important;
+}
+
 .video-backdrop {
   position: absolute;
   inset: 0;
@@ -506,6 +510,10 @@ button:disabled {
   z-index: 35;
   display: grid;
   place-items: center;
+}
+
+.voice-modal[hidden] {
+  display: none !important;
 }
 
 .voice-backdrop {
