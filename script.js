@@ -435,6 +435,10 @@ videoBackdrop.addEventListener("click", () => {
   closeVideoModal();
 });
 
+projectVideo.addEventListener("ended", () => {
+  closeVideoModal({ backToCover: true });
+});
+
 printBtn.addEventListener("click", () => {
   stopNarration();
   window.print();
@@ -584,9 +588,15 @@ function openVideoModal() {
   }
 }
 
-function closeVideoModal() {
+function closeVideoModal(options = {}) {
+  const { backToCover = false } = options;
   videoModal.classList.remove("show");
   projectVideo.pause();
+  projectVideo.currentTime = 0;
+  if (backToCover) {
+    current = 0;
+    render();
+  }
   window.setTimeout(() => {
     if (!videoModal.classList.contains("show")) {
       videoModal.setAttribute("hidden", "");
