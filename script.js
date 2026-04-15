@@ -142,6 +142,89 @@ const deckContent = {
         mark: "CircaGuard",
         highlight: "让生物节律回归自然",
       },
+      {
+        type: "bullets",
+        title: "设计反思：从产品到系统",
+        bullets: [
+          "在阶段性评审中，我们收到了关键反馈：是否可以不局限于单一产品，而构建一个系统？",
+          "当前方案虽然具备干预能力，但仍停留在“单点设计”。",
+          "睡眠问题是系统性问题，单一设备难以形成持续影响。",
+        ],
+        highlight: "问题在于：系统性问题需要系统级方案。",
+      },
+      {
+        type: "bullets",
+        title: "问题升级：从产品问题到系统问题",
+        bullets: [
+          "青少年睡眠问题并非单点行为问题",
+          "生物节律（Biological）+ 行为习惯（Behavioral）+ 环境光照（Environmental）共同作用",
+          "因此需要系统级干预，而非单一工具",
+        ],
+      },
+      {
+        type: "flow",
+        title: "从产品到闭环系统",
+        flow: "感知 → 决策 → 干预 → 反馈",
+        bullets: [
+          "生物层：节律 / 褪黑素",
+          "数字层：AI / 预测",
+          "物理层：光环境",
+          "实现持续优化的节律调控",
+        ],
+      },
+      {
+        type: "bullets",
+        title: "进一步反馈：从设备到空间",
+        bullets: [
+          "是否可以将该系统扩展为“空间中的光环境系统”？",
+          "光本质上属于环境变量",
+          "单一设备影响有限，空间才是节律的真实载体",
+        ],
+      },
+      {
+        type: "bullets",
+        title: "从设备到空间系统",
+        bullets: [
+          "CircaGuard 最终演化为：昼夜节律光环境系统",
+          "个体层（Personal） / 空间层（Spatial） / 系统层（Network）",
+          "从“工具”转向“环境基础设施”",
+        ],
+      },
+      {
+        type: "grid",
+        title: "系统构成：多层级光环境",
+        cards: [
+          { title: "个体层", text: "仿生蘑菇灯 / 个性化干预" },
+          { title: "空间层", text: "天花动态光 / 光分区 / 时间驱动变化" },
+          { title: "系统层", text: "多设备联动 / AI统一调度" },
+        ],
+        highlight: "构建完整节律生态。",
+      },
+      {
+        type: "grid",
+        title: "应用场景：节律空间设计",
+        cards: [
+          { title: "学校", text: "早晨高照度冷光 / 下午中性光 / 晚间低蓝光" },
+          { title: "家庭", text: "客厅与卧室节律分区 / 个体与家庭节律协调" },
+          { title: "核心介质", text: "让光成为节律调控媒介" },
+        ],
+      },
+      {
+        type: "bullets",
+        title: "从设计产品到设计系统",
+        bullets: [
+          "不再只是一个灯",
+          "而是一个节律系统 + 一个空间策略 + 一种生物设计方法",
+          "设计的核心转向“人与环境的关系”",
+        ],
+      },
+      {
+        type: "closing",
+        title: "结论",
+        sentence: "从物件到系统，再到空间基础设施。",
+        mark: "CircaGuard",
+        highlight: "重新设计夜晚，重新设计未来",
+      },
     ],
   },
   en: {
@@ -265,6 +348,89 @@ const deckContent = {
         mark: "CircaGuard",
         highlight: "Bring circadian rhythm back to nature",
       },
+      {
+        type: "bullets",
+        title: "Design Reflection: from product to system",
+        bullets: [
+          "In milestone reviews, we received key feedback: can this move beyond a single product into a system?",
+          "The current proposal has intervention potential, but it is still a single-point design.",
+          "Sleep is a systemic issue, and one device alone cannot create sustained impact.",
+        ],
+        highlight: "Systemic problems require system-level solutions.",
+      },
+      {
+        type: "bullets",
+        title: "Problem upgrade: from product issue to system issue",
+        bullets: [
+          "Adolescent sleep is not a single behavior problem",
+          "It is co-shaped by Biological, Behavioral, and Environmental factors",
+          "Therefore, we need system-level intervention rather than a standalone tool",
+        ],
+      },
+      {
+        type: "flow",
+        title: "From product to closed-loop system",
+        flow: "Sensing → Decision → Intervention → Feedback",
+        bullets: [
+          "Biological layer: rhythm / melatonin",
+          "Digital layer: AI / prediction",
+          "Physical layer: light environment",
+          "Continuous optimization of circadian regulation",
+        ],
+      },
+      {
+        type: "bullets",
+        title: "Further feedback: from device to space",
+        bullets: [
+          "Can this system scale into a spatial light-environment system?",
+          "Light is fundamentally an environmental variable",
+          "A single device has limited influence; space is the true carrier of rhythm",
+        ],
+      },
+      {
+        type: "bullets",
+        title: "From device to spatial system",
+        bullets: [
+          "CircaGuard evolves into a circadian light-environment system",
+          "Personal layer / Spatial layer / Network layer",
+          "From a tool to environmental infrastructure",
+        ],
+      },
+      {
+        type: "grid",
+        title: "System architecture: multi-layer light environment",
+        cards: [
+          { title: "Personal layer", text: "Biomimetic mushroom lamp / personalized intervention" },
+          { title: "Spatial layer", text: "Dynamic ceiling light / zoned ambience / time-driven changes" },
+          { title: "System layer", text: "Multi-device coordination / AI unified scheduling" },
+        ],
+        highlight: "Building a complete circadian ecosystem.",
+      },
+      {
+        type: "grid",
+        title: "Application scenarios: circadian spatial design",
+        cards: [
+          { title: "School", text: "Morning: bright cool light / Afternoon: neutral light / Evening: low-blue light" },
+          { title: "Home", text: "Rhythm zoning in living room and bedroom / personal-family rhythm alignment" },
+          { title: "Core medium", text: "Light becomes the medium of circadian regulation" },
+        ],
+      },
+      {
+        type: "bullets",
+        title: "From designing a product to designing a system",
+        bullets: [
+          "No longer just one lamp",
+          "It becomes a rhythm system, a spatial strategy, and a biodesign method",
+          "The design focus shifts to the relationship between people and environment",
+        ],
+      },
+      {
+        type: "closing",
+        title: "Conclusion",
+        sentence: "From object, to system, to spatial infrastructure.",
+        mark: "CircaGuard",
+        highlight: "Redesign the night, redesign the future",
+      },
     ],
   },
 };
@@ -282,6 +448,15 @@ const narration = {
     "该系统具有多层级价值：对个体，可以提升睡眠质量、情绪与学习效率；对家庭，有助于建立更健康的作息；对学校，则支持节律友好的教育环境。",
     "这个项目也回应了Biodesign Challenge的核心理念。在这里，生物不仅是灵感来源，而是直接参与系统运行的一部分。",
     "重新设计夜晚，其实是在重新设计一代人的未来。CircaGuard，让生物节律回归自然。",
+    "在中期评审中，我们收到了一个非常重要的反馈，就是这个方案是否可以从一个产品扩展为一个系统。这也促使我们重新思考问题的本质。",
+    "我们重新定义问题，发现它不仅仅是一个行为问题，而是生物、行为与环境共同作用的系统问题。",
+    "因此我们将方案扩展为一个闭环系统，通过持续反馈实现节律优化。",
+    "在进一步讨论中，我们收到了第二个关键反馈，就是是否可以把这个系统扩展到空间尺度。",
+    "最终，我们将系统扩展为一个空间级的节律光环境系统，实现从个体到环境的整体调控。",
+    "系统分为三个层级，从个体设备到空间环境，再到整体系统联动。",
+    "我们将系统应用到学校与家庭场景，通过光环境来引导节律。",
+    "这个项目的重点已经从设计一个产品，转向设计人与环境之间的关系。",
+    "最终，这个项目从一个物件演变为一个系统，再到一个空间基础设施。",
   ],
   en: [
     "Hello everyone, my project is CircaGuard, a sleep intervention system for adolescents based on circadian rhythm and AI, developed under the framework of convergent life and biodesign.",
@@ -295,6 +470,15 @@ const narration = {
     "The system creates value on multiple levels: for individuals, it improves sleep, mood, and learning efficiency; for families, it supports healthier routines; and for schools, it enables rhythm-friendly learning environments.",
     "This project aligns with the core vision of the Biodesign Challenge. Here, biology is not just inspiration, but an active component of the system itself.",
     "To redesign the night is to redesign the future of a generation. CircaGuard brings circadian rhythm back to nature.",
+    "During the mid-review, we received critical feedback: can this be expanded from a single product into a system? This prompted us to rethink the nature of the problem.",
+    "We reframed the problem as a systemic issue involving biological, behavioral, and environmental factors.",
+    "We expanded the design into a closed-loop system that continuously optimizes circadian rhythms through feedback.",
+    "In further discussions, we received another key suggestion: can this system be expanded to a spatial scale?",
+    "Ultimately, we expanded the system into a spatial circadian lighting system, enabling both individual and environmental regulation.",
+    "The system operates across three layers, from personal devices to spatial environments and networked coordination.",
+    "We apply the system to schools and homes, using light environments to guide circadian rhythms.",
+    "The focus has shifted from designing a product to designing the relationship between humans and their environment.",
+    "In conclusion, this project evolves from an object to a system, and ultimately to a spatial infrastructure.",
   ],
 };
 
