@@ -577,6 +577,10 @@ button:disabled {
   z-index: 25;
 }
 
+.page-jump-panel[hidden] {
+  display: none !important;
+}
+
 .page-jump-panel button {
   min-height: 34px;
   padding: 6px 0;
