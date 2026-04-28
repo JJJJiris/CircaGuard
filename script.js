@@ -242,8 +242,9 @@ const deckContent = {
       },
       {
         type: "closing",
-        title: "",
+        title: "CircaGuard",
         sentence: "重新设计夜晚，也重新设计未来。",
+        emphasis: true,
       },
     ],
   },
@@ -466,8 +467,9 @@ const deckContent = {
       },
       {
         type: "closing",
-        title: "",
+        title: "CircaGuard",
         sentence: "Redesign the night, redesign the future.",
+        emphasis: true,
       },
     ],
   },
@@ -617,7 +619,7 @@ function renderSlide(slide, index) {
     return `
       <section class="slide ${index === current ? "active" : ""}">
         ${slide.title ? `<h3 class="reveal">${slide.title}</h3>` : ""}
-        <p class="closing reveal">${slide.sentence}</p>
+        <p class="closing reveal ${slide.emphasis ? "closing-emphasis" : ""}">${slide.sentence}</p>
         ${slide.mark ? `<h2 class="reveal">${slide.mark}</h2>` : ""}
         ${slide.highlight ? `<p class="highlight reveal">${slide.highlight}</p>` : ""}
       </section>`;
