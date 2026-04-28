@@ -39,7 +39,7 @@ const deckContent = {
       voiceSettingsTitle: "语音设置",
       previewVoice: "试听当前页",
       resetVoice: "恢复自动推荐",
-      voiceTip: "建议优先选择包含 Siri / Neural / Enhanced 的语音，听感会更自然。",
+      voiceTip: "可在英文声音中选择“豆包英文音色（分页音频）”，其余情况下建议优先选择包含 Siri / Neural / Enhanced 的语音。",
       zhVoiceLabel: "中文声音",
       enVoiceLabel: "英文声音",
     },
@@ -254,7 +254,7 @@ const deckContent = {
       voiceSettingsTitle: "Voice Settings",
       previewVoice: "Preview Current Slide",
       resetVoice: "Reset Auto Pick",
-      voiceTip: "Prefer voices containing Siri / Neural / Enhanced for a more natural tone.",
+      voiceTip: "You can choose 'Doubao EN Voice Pack (Per-slide Audio)' under English voices. Otherwise, prefer Siri / Neural / Enhanced voices for a more natural tone.",
       zhVoiceLabel: "Chinese Voice",
       enVoiceLabel: "English Voice",
     },
@@ -518,6 +518,9 @@ const speechReady = "speechSynthesis" in window;
 let speechVoices = [];
 let speechQueueId = 0;
 const VOICE_PREF_KEY = "circaguard_voice_preferences_v1";
+const DOUBAO_EN_URI = "__doubao_en_pack__";
+const doubaoEnAudio = new Audio();
+doubaoEnAudio.preload = "auto";
 const voicePreferences = {
   zh: null,
   en: null,
@@ -842,10 +845,30 @@ function pickVoice() {
   return candidates.sort((a, b) => scoreVoice(b) - scoreVoice(a))[0] || null;
 }
 
+function isDoubaoEnSelected() {
+  return lang === "en" && voicePreferences.en === DOUBAO_EN_URI;
+}
+
+function playDoubaoEnglishSlide() {
+  const slideNum = current + 1;
+  const src = `./assets/doubao-en/slide${slideNum}.m4a`;
+  if (doubaoEnAudio.src !== new URL(src, window.location.href).href) {
+    doubaoEnAudio.src = src;
+  }
+  doubaoEnAudio.currentTime = 0;
+  const playPromise = doubaoEnAudio.play();
+  if (playPromise && typeof playPromise.catch === "function") {
+    playPromise.catch(() => {});
+  }
+}
+
 function stopNarration() {
-  if (!speechReady) return;
   speechQueueId += 1;
-  window.speechSynthesis.cancel();
+  doubaoEnAudio.pause();
+  doubaoEnAudio.currentTime = 0;
+  if (speechReady) {
+    window.speechSynthesis.cancel();
+  }
 }
 
 function splitIntoSpeechChunks(text) {
@@ -856,10 +879,15 @@ function splitIntoSpeechChunks(text) {
 }
 
 function speakCurrentSlide() {
-  if (!speechReady || !voiceOn) return;
+  if (!voiceOn) return;
   const text = narration[lang][current];
   if (!text) return;
   stopNarration();
+  if (isDoubaoEnSelected()) {
+    playDoubaoEnglishSlide();
+    return;
+  }
+  if (!speechReady) return;
   const queueId = speechQueueId;
   const chunks = splitIntoSpeechChunks(text);
   const chosenVoice = pickVoice();
@@ -966,22 +994,28 @@ function renderVoiceSelectOptions() {
     ["en-us", "en-gb", "en"].some((prefix) => voice.lang.toLowerCase().startsWith(prefix))
   );
 
-  zhVoiceSelect.innerHTML = buildVoiceOptions(zhVoices, voicePreferences.zh);
-  enVoiceSelect.innerHTML = buildVoiceOptions(enVoices, voicePreferences.en);
+  zhVoiceSelect.innerHTML = buildVoiceOptions(zhVoices, voicePreferences.zh, { includeDoubao: false });
+  enVoiceSelect.innerHTML = buildVoiceOptions(enVoices, voicePreferences.en, { includeDoubao: true });
 }
 
-function buildVoiceOptions(voices, selectedURI) {
+function buildVoiceOptions(voices, selectedURI, options = {}) {
+  const { includeDoubao = false } = options;
   const autoLabel = lang === "zh" ? "自动推荐" : "Auto";
-  const options = [`<option value="">${autoLabel}</option>`];
+  const optionHtml = [`<option value="">${autoLabel}</option>`];
+  if (includeDoubao) {
+    const doubaoLabel = lang === "zh" ? "豆包英文音色（分页音频）" : "Doubao EN Voice Pack (Per-slide Audio)";
+    const selected = selectedURI === DOUBAO_EN_URI ? " selected" : "";
+    optionHtml.push(`<option value="${DOUBAO_EN_URI}"${selected}>${doubaoLabel}</option>`);
+  }
   voices.forEach((voice) => {
     const selected = selectedURI === voice.voiceURI ? " selected" : "";
-    options.push(
+    optionHtml.push(
       `<option value="${escapeHtml(voice.voiceURI)}"${selected}>${escapeHtml(
         `${voice.name} (${voice.lang})`
       )}</option>`
     );
   });
-  return options.join("");
+  return optionHtml.join("");
 }
 
 function escapeHtml(text) {
