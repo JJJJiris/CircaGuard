@@ -258,6 +258,30 @@ h4 {
   animation: riseIn 0.5s ease forwards;
 }
 
+.slide-mockup {
+  margin: 16px auto 0;
+  width: min(340px, 72%);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(126, 168, 255, 0.18);
+  border-radius: 18px;
+  padding: 10px;
+  box-shadow: 0 16px 36px rgba(7, 11, 22, 0.45), 0 0 28px rgba(86, 241, 210, 0.12);
+}
+
+.slide-mockup img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.slide-mockup figcaption {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: #c0d2f7;
+  text-align: center;
+}
+
 .slide.active .reveal:nth-child(1) {
   animation-delay: 0.05s;
 }

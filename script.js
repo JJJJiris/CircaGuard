@@ -182,6 +182,11 @@ const deckContent = {
           "用户可以看到睡眠统计、节律偏移趋势、日常提醒与建议",
           "APP 还能呈现个体层与空间层的联动状态",
         ],
+        mockup: {
+          src: "./assets/app-mockup.png",
+          alt: "CircaGuard APP 示例样机",
+          caption: "APP 示例样机",
+        },
         highlight: "APP 是个体节律管理平台。",
       },
       {
@@ -395,6 +400,11 @@ const deckContent = {
           "Users can view sleep statistics, circadian shift trends, and daily reminders",
           "It also presents the linkage between personal and spatial layers",
         ],
+        mockup: {
+          src: "./assets/app-mockup.png",
+          alt: "CircaGuard app mockup",
+          caption: "APP mockup example",
+        },
         highlight: "The app becomes a personal rhythm management platform.",
       },
       {
@@ -460,39 +470,41 @@ const narration = {
     "在用户的一天中，系统进行节律引导：早晨使用高照度冷光提升清醒度；夜晚转为低色温暖光保护褪黑素；深夜提供柔和微光辅助入睡。我们不是强迫用户改变行为，而是引导身体回归节律。",
     "CircaGuard 的有效性来源于三个方面：顺应青春期节律变化、精准控制光照时序，以及AI驱动的个性化干预。通过生物、数字与物理的整合，我们从根本上重建节律系统。",
     "该系统具有多层级价值：对个体，可以提升睡眠质量、情绪与学习效率；对家庭，有助于建立更健康的作息；对学校，则支持节律友好的教育环境。",
-    "这个项目也回应了Biodesign Challenge的核心理念。在这里，生物不仅是灵感来源，而是直接参与系统运行的一部分。",
+    "这个项目也回应了 Biodesign Challenge 的核心理念。在这里，生物不仅是灵感来源，而是直接参与系统运行的一部分。",
     "重新设计夜晚，其实是在重新设计一代人的未来。CircaGuard，让生物节律回归自然。",
     "在中期评审中，我们收到了一个非常重要的反馈，就是这个方案是否可以从一个产品扩展为一个系统。这促使我们重新思考问题的本质。青少年睡眠问题并不是一个单点产品可以解决的问题，而是一个涉及生物、行为和环境的系统性问题。",
     "因此，我们将方案扩展为一个闭环系统。它不再只是一个发光装置，而是一个可以感知、分析、干预并持续反馈的节律系统。生物层、数字层和物理层共同构成它的核心结构。",
-    "老师提出的最关键问题之一，就是系统如何获取用户数据。没有数据，就无法判断用户当前的节律状态，也无法实现真正有效的个性化干预。因此，我们将数据采集明确为系统设计的基础。",
-    "老师提到，APP 应该能够帮助分析用户数据，并提供可视化 dashboard。这一点非常重要。因此在更新后的方案中，APP 不再只是遥控器，而是整个系统的数据中心、分析中心和反馈中心。",
-    "老师还提出了另一个关键问题，就是灯能否成为一种沟通工具，而不仅仅是照明设备。基于这个反馈，我们把灯重新定义为一种持续存在但低打扰的节律提醒媒介，让环境本身能够传达身体状态。",
+    "提出的最关键问题之一，就是系统如何获取用户数据。没有数据，就无法判断用户当前的节律状态，也无法实现真正有效的个性化干预。因此，我们将数据采集明确为系统设计的基础。",
+    "APP 应该能够帮助分析用户数据，并提供可视化 dashboard。这一点非常重要。因此在更新后的方案中，APP 不再只是遥控器，而是整个系统的数据中心、分析中心和反馈中心。",
+    "同时我们也在思考灯能否成为一种沟通工具，而不仅仅是照明设备。基于这个反馈，我们把灯重新定义为一种持续存在但低打扰的节律提示终端，让环境本身能够传达身体状态。",
     "在进一步讨论中，我们收到第二个关键反馈，就是是否可以把这个系统扩展到空间尺度。这使我们意识到，光并不只是产品属性，而是环境变量。因此，真正有效的节律干预需要从设备走向空间。",
     "最终，我们将系统明确为家庭与学校双场景协同结构。家庭卧室负责个体化、持续性的闭环干预；学校教室则作为公共环境辅助系统，在白天帮助稳定节律状态。两者共同构成一个更完整的节律生态。",
     "在应用层面，我们将个体层聚焦在家庭卧室，将空间层聚焦在学校教室。卧室是最直接发生睡眠行为的地方，适合进行个体化干预；教室则是最重要的公共学习环境，适合提供节律友好的空间支持。",
-    "最终，这个项目从一个物件演变为一个系统，再进一步扩展为空间基础设施。为了让它更可实施，我们也提出了分阶段落地路径，先从个体层系统开始，再逐步扩展到学校空间层。",
+    "最终，这个项目从一个产品演变为一个系统，再进一步扩展为空间基础设施。为了让它更可实施，我们也提出了分阶段落地路径，先从个体层系统开始，再逐步扩展到学校空间层。",
+    "CircaGuard 的演化路径是：产品到系统，再到空间。我们希望通过可持续的节律基础设施，重新设计夜晚，也重新设计未来。",
   ],
   en: [
-    "Hello everyone, my project is CircaGuard, a sleep intervention system for adolescents based on circadian rhythm and AI, developed under the framework of convergent life and biodesign.",
-    "Today, a sleep crisis among adolescents is intensifying. 75% of teenagers suffer from insufficient sleep, averaging only 7.2 hours, and over 60% experience social jet lag. This is not a problem of discipline, but a structural conflict between biological rhythms and social systems.",
-    "Current solutions have clear limitations. Apps lack real environmental awareness, wearables fail to change behavior, medication is unsuitable for adolescents, and educational approaches have low compliance. They all overlook a key factor: circadian rhythm and light environment.",
-    "CircaGuard is a bio-digital-physical closed-loop system. At the biological level, it focuses on circadian rhythm and melatonin; at the digital level, AI enables prediction and intervention; and at the physical level, a biomimetic glowing mushroom lamp regulates the environment. We aim to solve the problem through a system, not just a tool.",
-    "The system operates as a continuously evolving loop: data collection, AI-based rhythm modeling, personalized intervention, environmental adjustment, and real-time feedback. Its core capabilities include rhythm prediction, environmental sensing, and adaptive intervention.",
-    "We chose a biomimetic glowing mushroom as the core medium. It naturally embodies rhythmic behavior and emits around 520nm bioluminescent light, which does not suppress melatonin. Its organic form also enhances user acceptance. It is not just symbolic, but biologically grounded.",
-    "Throughout the day, the system guides the user's rhythm: bright cool light in the morning to boost alertness, warm low-temperature light at night to protect melatonin, and soft dim light late at night to support sleep. Instead of forcing behavior change, it gently realigns the body's rhythm.",
-    "Its effectiveness comes from three aspects: aligning with adolescent circadian shifts, precise control of light timing, and AI-driven personalization. By integrating biological, digital, and physical layers, it reconstructs the rhythm system at its core.",
-    "The system creates value on multiple levels: for individuals, it improves sleep, mood, and learning efficiency; for families, it supports healthier routines; and for schools, it enables rhythm-friendly learning environments.",
-    "This project aligns with the core vision of the Biodesign Challenge. Here, biology is not just inspiration, but an active component of the system itself.",
+    "Hello everyone, our project is CircaGuard, an adolescent sleep intervention system based on circadian rhythm and AI, developed as a biodesign practice under the Convergent Life framework.",
+    "At present, the adolescent sleep crisis is intensifying. Data shows that 75% of adolescents are sleep-deprived, with an average sleep duration of only 7.2 hours, and over 60% experience social jet lag. This is not a self-discipline issue, but a structural conflict between biological rhythms and social systems.",
+    "Current interventions have clear limitations. Apps cannot sense real environments, wearables struggle to change behavior, medication is unsuitable for adolescents, and educational persuasion has low adherence. They all overlook one key variable: circadian rhythm and the light environment.",
+    "CircaGuard is a bio-digital-physical closed-loop system. At the biological layer, we focus on circadian rhythm and melatonin; at the digital layer, we use AI for prediction and intervention; at the physical layer, we regulate the environment through a biomimetic bioluminescent mushroom lamp. We aim to solve the problem with a system, not just a tool.",
+    "The system forms a continuously optimized loop: starting from data collection, generating personalized plans through AI modeling, then applying light-environment intervention, and continuously adjusting based on feedback. Its core capabilities are rhythm prediction, environmental recognition, and dynamic intervention.",
+    "We chose a biomimetic bioluminescent mushroom as the core medium. It has intrinsic rhythmic characteristics and can emit bio-light at around 520 nm, which does not suppress melatonin secretion. At the same time, its form is more approachable. It is not just a design symbol, but a biologically grounded intervention method.",
+    "Throughout the user's day, the system provides rhythm guidance: bright cool light in the morning to increase alertness; warm low-color-temperature light at night to protect melatonin; and gentle dim light late at night to support sleep. We do not force behavior change; we guide the body back to its rhythm.",
+    "The effectiveness of CircaGuard comes from three aspects: aligning with adolescent circadian shifts, precisely controlling light timing, and AI-driven personalized intervention. Through the integration of biological, digital, and physical layers, we rebuild the rhythm system at its foundation.",
+    "This system has multi-level value: for individuals, it improves sleep quality, mood, and learning efficiency; for families, it helps establish healthier routines; and for schools, it supports rhythm-friendly educational environments.",
+    "This project also responds to the core vision of the Biodesign Challenge. Here, biology is not only a source of inspiration, but an active part of system operation.",
     "To redesign the night is to redesign the future of a generation. CircaGuard brings circadian rhythm back to nature.",
-    "During the mid-review, we received a very important question: can this project expand from a single product into a system? This pushed us to rethink the nature of the problem. Adolescent sleep is not something that can be solved by one isolated object, but a systemic issue involving biology, behavior, and environment.",
-    "So we expanded the proposal into a closed-loop system. It is no longer just a lighting object, but a rhythm system that can sense, analyze, intervene, and continuously adapt through feedback. Its core structure includes biological, digital, and physical layers.",
-    "One of the most critical questions was how the system actually collects user data. Without data, it cannot determine the user's current rhythm state or support meaningful personalized intervention. So data collection becomes the foundation of the system.",
-    "It was suggested that the app should help analyze user data and provide a dashboard. This is very important. In the updated proposal, the app is no longer just a controller, but the data, analysis, and feedback center of the entire system.",
-    "Another key question was whether the lamp could become a communication tool instead of being only a lighting device. Based on this feedback, we redefine the lamp as a low-interruption but constantly present circadian reminder, allowing the environment itself to communicate the body's internal state.",
-    "In further discussion, we received a second key suggestion: can this system expand to a spatial scale? This made us realize that light is not only a product feature, but an environmental variable. So effective circadian intervention must move from device scale to spatial scale.",
-    "Ultimately, we define the project as a coordinated dual-scenario system between home and school. The bedroom supports individualized and continuous closed-loop intervention, while the classroom acts as a public environmental support system that stabilizes rhythms during the day. Together they form a more complete circadian ecosystem.",
-    "At the application level, we focus the personal layer on the bedroom and the spatial layer on the classroom. The bedroom is where sleep behavior most directly occurs, making it suitable for individualized intervention, while the classroom is a key public learning environment for circadian-friendly spatial support.",
-    "In conclusion, this project evolves from an object to a system, and ultimately to a spatial infrastructure. To make it more feasible, we also propose a phased path to implementation, starting with the personal system and gradually expanding into the school spatial system.",
+    "During the mid-term review, we received a very important piece of feedback: whether this proposal could be expanded from a product into a system. This prompted us to rethink the nature of the problem. Adolescent sleep is not a single-point product problem, but a systemic issue involving biology, behavior, and environment.",
+    "Therefore, we expanded the proposal into a closed-loop system. It is no longer just a lighting device, but a rhythm system that can sense, analyze, intervene, and continuously provide feedback. Its core structure is jointly formed by biological, digital, and physical layers.",
+    "One of the most critical questions raised is how the system obtains user data. Without data, it is impossible to determine the user's current rhythm state, and truly effective personalized intervention cannot be achieved. Therefore, we define data collection as the foundation of system design.",
+    "The app should help analyze user data and provide a visual dashboard. This is very important. Therefore, in the updated proposal, the app is no longer just a remote controller, but the data center, analysis center, and feedback center of the whole system.",
+    "At the same time, we are also considering whether the lamp can become a communication tool rather than only a lighting device. Based on this feedback, we redefine the lamp as a continuously present but low-interruption rhythm guidance terminal, allowing the environment itself to convey bodily state.",
+    "In further discussion, we received a second key piece of feedback: whether this system could be expanded to a spatial scale. This made us realize that light is not only a product attribute, but an environmental variable. Therefore, truly effective circadian intervention must move from device scale to spatial scale.",
+    "Ultimately, we define the system as a dual-scenario coordinated structure between home and school. The home bedroom supports individualized and continuous closed-loop intervention, while school classrooms serve as a public environmental support system to stabilize circadian states during the day. Together, they form a more complete rhythm ecosystem.",
+    "At the application level, we focus the personal layer on home bedrooms and the spatial layer on school classrooms. Bedrooms are where sleep behavior occurs most directly and are suitable for individualized intervention; classrooms are the most important public learning environments and are suitable for rhythm-friendly spatial support.",
+    "In the end, this project evolves from a product into a system, and further into spatial infrastructure. To make it more implementable, we also propose a phased deployment path: starting with the personal-layer system, then gradually expanding to the school spatial layer.",
+    "The evolution path of CircaGuard is: product to system, then to space. Through sustainable circadian infrastructure, we hope to redesign the night and redesign the future.",
   ],
 };
 
@@ -511,6 +523,18 @@ const voicePreferences = {
 
 function itemList(items) {
   return `<ul class="reveal">${items.map((item) => `<li>${item}</li>`).join("")}</ul>`;
+}
+
+function renderMockup(mockup) {
+  if (!mockup || !mockup.src) {
+    return "";
+  }
+
+  return `
+    <figure class="slide-mockup reveal">
+      <img src="${mockup.src}" alt="${mockup.alt || "App mockup"}" loading="lazy" />
+      ${mockup.caption ? `<figcaption>${mockup.caption}</figcaption>` : ""}
+    </figure>`;
 }
 
 function renderSlide(slide, index) {
@@ -586,6 +610,7 @@ function renderSlide(slide, index) {
     <section class="slide ${index === current ? "active" : ""}">
       <h3 class="reveal">${slide.title}</h3>
       ${itemList(slide.bullets)}
+      ${renderMockup(slide.mockup)}
       ${slide.highlight ? `<p class="highlight reveal">${slide.highlight}</p>` : ""}
     </section>`;
 }
