@@ -242,9 +242,10 @@ const deckContent = {
       },
       {
         type: "closing",
-        title: "CircaGuard",
-        sentence: "重新设计夜晚，也重新设计未来。",
-        emphasis: true,
+        title: "重新设计夜晚",
+        sentence: "就是重新设计一代人的未来。",
+        mark: "CircaGuard",
+        highlight: "让生物节律回归自然",
       },
     ],
   },
@@ -467,9 +468,10 @@ const deckContent = {
       },
       {
         type: "closing",
-        title: "CircaGuard",
-        sentence: "Redesign the night, redesign the future.",
-        emphasis: true,
+        title: "Redesigning the night",
+        sentence: "means redesigning the future of a generation.",
+        mark: "CircaGuard",
+        highlight: "Bring circadian rhythm back to nature",
       },
     ],
   },
@@ -617,7 +619,7 @@ function renderSlide(slide, index) {
 
   if (slide.type === "closing") {
     return `
-      <section class="slide ${index === current ? "active" : ""}">
+      <section class="slide ${index === current ? "active" : ""} ${slide.layout === "top" ? "closing-top" : ""}">
         ${slide.title ? `<h3 class="reveal">${slide.title}</h3>` : ""}
         <p class="closing reveal ${slide.emphasis ? "closing-emphasis" : ""}">${slide.sentence}</p>
         ${slide.mark ? `<h2 class="reveal">${slide.mark}</h2>` : ""}
