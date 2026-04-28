@@ -3,6 +3,8 @@ const counter = document.getElementById("counter");
 const progress = document.getElementById("progress");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
+const pageJumpBtn = document.getElementById("pageJumpBtn");
+const pageJumpPanel = document.getElementById("pageJumpPanel");
 const printBtn = document.getElementById("printBtn");
 const fullscreenBtn = document.getElementById("fullscreenBtn");
 const langBtn = document.getElementById("langBtn");
@@ -185,7 +187,7 @@ const deckContent = {
         mockup: {
           src: "./assets/app-mockup.png",
           alt: "CircaGuard APP 示例样机",
-          caption: "APP 示例样机",
+          caption: "APP界面",
           position: "right",
         },
         highlight: "APP 是个体节律管理平台。",
@@ -240,10 +242,8 @@ const deckContent = {
       },
       {
         type: "closing",
-        title: "最终结语",
-        sentence: "CircaGuard 的演化路径是：产品到系统，再到空间。",
-        mark: "CircaGuard",
-        highlight: "通过可持续的节律基础设施，重新设计夜晚，也重新设计未来。",
+        title: "",
+        sentence: "重新设计夜晚，也重新设计未来。",
       },
     ],
   },
@@ -411,7 +411,7 @@ const deckContent = {
         mockup: {
           src: "./assets/app-mockup.png",
           alt: "CircaGuard app mockup",
-          caption: "APP mockup example",
+          caption: "APP Interface",
           position: "right",
         },
         highlight: "The app becomes a personal rhythm management platform.",
@@ -466,10 +466,8 @@ const deckContent = {
       },
       {
         type: "closing",
-        title: "Final Note",
-        sentence: "The evolution path of CircaGuard is: product to system, then to space.",
-        mark: "CircaGuard",
-        highlight: "Through sustainable circadian infrastructure, we hope to redesign the night and redesign the future.",
+        title: "",
+        sentence: "Redesign the night, redesign the future.",
       },
     ],
   },
@@ -497,7 +495,7 @@ const narration = {
     "最终，我们将系统明确为家庭与学校双场景协同结构。家庭卧室负责个体化、持续性的闭环干预；学校教室则作为公共环境辅助系统，在白天帮助稳定节律状态。两者共同构成一个更完整的节律生态。",
     "在应用层面，我们将个体层聚焦在家庭卧室，将空间层聚焦在学校教室。卧室是最直接发生睡眠行为的地方，适合进行个体化干预；教室则是最重要的公共学习环境，适合提供节律友好的空间支持。",
     "最终，这个项目从一个产品演变为一个系统，再进一步扩展为空间基础设施。为了让它更可实施，我们也提出了分阶段落地路径，先从个体层系统开始，再逐步扩展到学校空间层。",
-    "CircaGuard 的演化路径是：产品到系统，再到空间。我们希望通过可持续的节律基础设施，重新设计夜晚，也重新设计未来。",
+    "重新设计夜晚，也重新设计未来。",
   ],
   en: [
     "Hello everyone, our project is CircaGuard, an adolescent sleep intervention system based on circadian rhythm and AI, developed as a biodesign practice under the Convergent Life framework.",
@@ -520,7 +518,7 @@ const narration = {
     "Ultimately, we define the system as a dual-scenario coordinated structure between home and school. The home bedroom supports individualized and continuous closed-loop intervention, while school classrooms serve as a public environmental support system to stabilize circadian states during the day. Together, they form a more complete rhythm ecosystem.",
     "At the application level, we focus the personal layer on home bedrooms and the spatial layer on school classrooms. Bedrooms are where sleep behavior occurs most directly and are suitable for individualized intervention; classrooms are the most important public learning environments and are suitable for rhythm-friendly spatial support.",
     "In the end, this project evolves from a product into a system, and further into spatial infrastructure. To make it more implementable, we also propose a phased deployment path: starting with the personal-layer system, then gradually expanding to the school spatial layer.",
-    "The evolution path of CircaGuard is: product to system, then to space. Through sustainable circadian infrastructure, we hope to redesign the night and redesign the future.",
+    "Redesign the night, redesign the future.",
   ],
 };
 
@@ -618,10 +616,10 @@ function renderSlide(slide, index) {
   if (slide.type === "closing") {
     return `
       <section class="slide ${index === current ? "active" : ""}">
-        <h3 class="reveal">${slide.title}</h3>
+        ${slide.title ? `<h3 class="reveal">${slide.title}</h3>` : ""}
         <p class="closing reveal">${slide.sentence}</p>
-        <h2 class="reveal">${slide.mark}</h2>
-        <p class="highlight reveal">${slide.highlight}</p>
+        ${slide.mark ? `<h2 class="reveal">${slide.mark}</h2>` : ""}
+        ${slide.highlight ? `<p class="highlight reveal">${slide.highlight}</p>` : ""}
       </section>`;
   }
 
@@ -671,6 +669,10 @@ function mountSlides() {
   document.querySelector("label[for='enVoiceSelect']").textContent = content.nav.enVoiceLabel;
   langBtn.textContent = lang === "zh" ? "EN" : "中";
   document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+  pageJumpBtn.textContent = lang === "zh" ? "页码" : "Pages";
+  pageJumpBtn.title = lang === "zh" ? "跳转到指定页面" : "Jump to specific page";
+  closePageJumpPanel();
+  buildPageJumpPanel();
   updateVoiceButton();
   renderVoiceSelectOptions();
 }
@@ -683,6 +685,7 @@ function render() {
   progress.style.width = `${((current + 1) / slides.length) * 100}%`;
   prevBtn.disabled = current === 0;
   nextBtn.disabled = current === slides.length - 1;
+  updatePageJumpActive();
   speakCurrentSlide();
 }
 
@@ -695,6 +698,15 @@ function go(step) {
 
 prevBtn.addEventListener("click", () => go(-1));
 nextBtn.addEventListener("click", () => go(1));
+
+pageJumpBtn.addEventListener("click", (event) => {
+  event.stopPropagation();
+  if (pageJumpPanel.hasAttribute("hidden")) {
+    openPageJumpPanel();
+  } else {
+    closePageJumpPanel();
+  }
+});
 
 langBtn.addEventListener("click", () => {
   lang = lang === "zh" ? "en" : "zh";
@@ -818,7 +830,16 @@ window.addEventListener("keydown", (event) => {
   } else if (event.key === "Escape" && isVoiceModalOpen()) {
     event.preventDefault();
     closeVoiceModal();
+  } else if (event.key === "Escape" && !pageJumpPanel.hasAttribute("hidden")) {
+    event.preventDefault();
+    closePageJumpPanel();
   }
+});
+
+document.addEventListener("click", (event) => {
+  if (pageJumpPanel.hasAttribute("hidden")) return;
+  if (pageJumpPanel.contains(event.target) || pageJumpBtn.contains(event.target)) return;
+  closePageJumpPanel();
 });
 
 function refreshVoices() {
@@ -988,6 +1009,41 @@ function closeVideoModal(options = {}) {
 function openVoiceModal() {
   voiceModal.removeAttribute("hidden");
   requestAnimationFrame(() => voiceModal.classList.add("show"));
+}
+
+function openPageJumpPanel() {
+  pageJumpPanel.removeAttribute("hidden");
+}
+
+function closePageJumpPanel() {
+  pageJumpPanel.setAttribute("hidden", "");
+}
+
+function buildPageJumpPanel() {
+  if (!pageJumpPanel) return;
+  pageJumpPanel.innerHTML = slides
+    .map(
+      (_, index) =>
+        `<button type="button" data-page="${index}" class="${index === current ? "active" : ""}">${index + 1}</button>`
+    )
+    .join("");
+  pageJumpPanel.querySelectorAll("button").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const target = Number(btn.dataset.page);
+      if (Number.isFinite(target) && target >= 0 && target < slides.length) {
+        current = target;
+        render();
+      }
+      closePageJumpPanel();
+    });
+  });
+}
+
+function updatePageJumpActive() {
+  if (!pageJumpPanel || pageJumpPanel.hasAttribute("hidden")) return;
+  pageJumpPanel.querySelectorAll("button").forEach((btn) => {
+    btn.classList.toggle("active", Number(btn.dataset.page) === current);
+  });
 }
 
 function closeVoiceModal() {
