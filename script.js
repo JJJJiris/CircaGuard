@@ -608,14 +608,27 @@ function renderSlide(slide, index) {
       </section>`;
   }
 
+  if (slide.mockup && slide.mockup.position === "right") {
+    return `
+      <section class="slide ${index === current ? "active" : ""} with-side-mockup">
+        <div class="slide-split">
+          <div class="slide-split-left">
+            <h3 class="reveal">${slide.title}</h3>
+            ${itemList(slide.bullets)}
+            ${slide.highlight ? `<p class="highlight reveal">${slide.highlight}</p>` : ""}
+          </div>
+          <div class="slide-split-right">
+            ${renderMockup(slide.mockup)}
+          </div>
+        </div>
+      </section>`;
+  }
+
   return `
-    <section class="slide ${index === current ? "active" : ""} ${slide.mockup?.position === "right" ? "with-side-mockup" : ""}">
+    <section class="slide ${index === current ? "active" : ""}">
       <h3 class="reveal">${slide.title}</h3>
-      ${
-        slide.mockup?.position === "right"
-          ? `<div class="slide-main">${itemList(slide.bullets)}</div>${renderMockup(slide.mockup)}`
-          : `${itemList(slide.bullets)}${renderMockup(slide.mockup)}`
-      }
+      ${itemList(slide.bullets)}
+      ${renderMockup(slide.mockup)}
       ${slide.highlight ? `<p class="highlight reveal">${slide.highlight}</p>` : ""}
     </section>`;
 }
