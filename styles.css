@@ -258,6 +258,37 @@ h4 {
   animation: riseIn 0.5s ease forwards;
 }
 
+.slide.with-side-mockup {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(220px, 0.9fr);
+  grid-template-rows: auto 1fr auto;
+  align-items: center;
+  column-gap: clamp(16px, 2.4vw, 36px);
+}
+
+.slide.with-side-mockup h3 {
+  grid-column: 1 / -1;
+}
+
+.slide.with-side-mockup .slide-main {
+  grid-column: 1;
+}
+
+.slide.with-side-mockup .slide-mockup {
+  grid-column: 2;
+  grid-row: 2;
+  margin: 0 0 0 auto;
+  width: min(320px, 100%);
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+}
+
+.slide.with-side-mockup .highlight {
+  grid-column: 1 / -1;
+}
+
 .slide-mockup {
   margin: 16px auto 0;
   width: min(340px, 72%);
@@ -280,6 +311,20 @@ h4 {
   font-size: 0.85rem;
   color: #c0d2f7;
   text-align: center;
+}
+
+@media (max-width: 900px) {
+  .slide.with-side-mockup {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .slide.with-side-mockup .slide-mockup {
+    margin: 8px auto 0;
+    width: min(310px, 78%);
+  }
 }
 
 .slide.active .reveal:nth-child(1) {

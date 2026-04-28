@@ -186,6 +186,7 @@ const deckContent = {
           src: "./assets/app-mockup.png",
           alt: "CircaGuard APP 示例样机",
           caption: "APP 示例样机",
+          position: "right",
         },
         highlight: "APP 是个体节律管理平台。",
       },
@@ -404,6 +405,7 @@ const deckContent = {
           src: "./assets/app-mockup.png",
           alt: "CircaGuard app mockup",
           caption: "APP mockup example",
+          position: "right",
         },
         highlight: "The app becomes a personal rhythm management platform.",
       },
@@ -607,10 +609,13 @@ function renderSlide(slide, index) {
   }
 
   return `
-    <section class="slide ${index === current ? "active" : ""}">
+    <section class="slide ${index === current ? "active" : ""} ${slide.mockup?.position === "right" ? "with-side-mockup" : ""}">
       <h3 class="reveal">${slide.title}</h3>
-      ${itemList(slide.bullets)}
-      ${renderMockup(slide.mockup)}
+      ${
+        slide.mockup?.position === "right"
+          ? `<div class="slide-main">${itemList(slide.bullets)}</div>${renderMockup(slide.mockup)}`
+          : `${itemList(slide.bullets)}${renderMockup(slide.mockup)}`
+      }
       ${slide.highlight ? `<p class="highlight reveal">${slide.highlight}</p>` : ""}
     </section>`;
 }
