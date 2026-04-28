@@ -232,8 +232,8 @@ const deckContent = {
       },
       {
         type: "closing",
-        title: "结论：从物件到系统，再到空间基础设施",
-        sentence: "CircaGuard 的演化路径是：物件 → 系统 → 空间。",
+        title: "结论：从产品到系统，再到空间基础设施",
+        sentence: "CircaGuard 的演化路径是：产品 → 系统 → 空间。",
         mark: "CircaGuard",
         highlight: "先以 APP + 智能卧室灯落地，再扩展到家庭—学校联动模型",
       },
@@ -450,8 +450,8 @@ const deckContent = {
       },
       {
         type: "closing",
-        title: "Conclusion: from object to system to spatial infrastructure",
-        sentence: "CircaGuard evolves along a clear path: object → system → space.",
+        title: "Conclusion: from product to system to spatial infrastructure",
+        sentence: "CircaGuard evolves along a clear path: product → system → space.",
         mark: "CircaGuard",
         highlight: "Start with an app and smart bedroom lamp, then scale to a coordinated home-school model",
       },
