@@ -41,10 +41,14 @@
           <h3 id="videoTitle">项目影片</h3>
           <button id="closeVideoBtn" type="button" aria-label="关闭影片">关闭</button>
         </div>
-        <video id="projectVideo" controls preload="metadata" playsinline>
-          <source src="./assets/demo.mp4" type="video/mp4" />
-          您的浏览器不支持视频播放，请更换浏览器重试。
-        </video>
+        <iframe
+          id="projectVideo"
+          title="CircaGuard Demo Video"
+          src=""
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
       </div>
     </div>
 
