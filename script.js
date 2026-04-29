@@ -17,6 +17,7 @@ const videoBackdrop = document.getElementById("videoBackdrop");
 const closeVideoBtn = document.getElementById("closeVideoBtn");
 const projectVideo = document.getElementById("projectVideo");
 const videoTitle = document.getElementById("videoTitle");
+const YOUTUBE_WATCH_URL = "https://www.youtube.com/watch?v=PMzhHfQlo-w";
 const YOUTUBE_VIDEO_ID = "PMzhHfQlo-w";
 const YOUTUBE_EMBED_URL = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1`;
 let ytPlayer = null;
@@ -811,7 +812,7 @@ fullscreenBtn.addEventListener("click", () => {
 });
 
 videoBtn.addEventListener("click", () => {
-  openVideoModal();
+  window.open(YOUTUBE_WATCH_URL, "_blank", "noopener,noreferrer");
 });
 
 posterBtn.addEventListener("click", () => {
