@@ -17,6 +17,7 @@ const closeVideoBtn = document.getElementById("closeVideoBtn");
 const projectVideo = document.getElementById("projectVideo");
 const videoTitle = document.getElementById("videoTitle");
 const YOUTUBE_VIDEO_ID = "PMzhHfQlo-w";
+const YOUTUBE_EMBED_URL = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1`;
 let ytPlayer = null;
 let ytApiReady = false;
 let ytApiLoading = false;
@@ -837,6 +838,9 @@ async function initYouTubePlayer() {
       playsinline: 1,
     },
     events: {
+      onReady: () => {
+        ytPlayer?.playVideo?.();
+      },
       onStateChange: (event) => {
         if (event.data === window.YT.PlayerState.ENDED) {
           closeVideoModal({ backToCover: true });
@@ -1042,9 +1046,12 @@ function openVideoModal() {
   videoModal.removeAttribute("hidden");
   requestAnimationFrame(() => videoModal.classList.add("show"));
   if (projectVideo.tagName === "IFRAME") {
-    initYouTubePlayer().then(() => {
-      if (ytPlayer?.playVideo) ytPlayer.playVideo();
-    });
+    // Always set iframe src first so video can render even if API loads slowly.
+    const targetSrc = new URL(YOUTUBE_EMBED_URL, window.location.href).href;
+    if (projectVideo.src !== targetSrc) {
+      projectVideo.src = targetSrc;
+    }
+    initYouTubePlayer().catch(() => {});
     return;
   }
   const playPromise = projectVideo.play?.();
