@@ -765,6 +765,69 @@ button:disabled {
   color: #a8bbe0;
 }
 
+.poster-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 36;
+  display: grid;
+  place-items: center;
+}
+
+.poster-modal[hidden] {
+  display: none !important;
+}
+
+.poster-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 8, 18, 0.76);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.poster-panel {
+  position: relative;
+  width: min(980px, 92vw);
+  max-height: 90vh;
+  border-radius: 16px;
+  padding: 12px;
+  background: linear-gradient(140deg, rgba(19, 30, 52, 0.95), rgba(10, 16, 30, 0.95));
+  box-shadow: 0 22px 64px rgba(0, 0, 0, 0.45);
+  transform: translateY(4px);
+  opacity: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  overflow: auto;
+}
+
+.poster-modal.show .poster-panel {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.poster-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.poster-head h3 {
+  margin: 0;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+.poster-head h3::after {
+  display: none;
+}
+
+#posterImage {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  background: rgba(7, 12, 22, 0.8);
+}
+
 @media (min-width: 1500px) {
   .slide {
     padding: clamp(34px, 4vw, 68px);
@@ -944,6 +1007,10 @@ button:disabled {
     border-radius: 14px;
   }
   .voice-panel {
+    width: 94vw;
+    padding: 10px;
+  }
+  .poster-panel {
     width: 94vw;
     padding: 10px;
   }

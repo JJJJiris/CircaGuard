@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CircaGuard Web PPT</title>
-    <link rel="stylesheet" href="./styles.css?v=20260428-uifix-4" />
+    <link rel="stylesheet" href="./styles.css?v=20260429-poster-1" />
   </head>
   <body>
     <div class="deck" id="deck">
@@ -15,6 +15,7 @@
           <button id="voiceSettingsBtn" type="button" title="语音设置">语音设置</button>
           <button id="langBtn" type="button" title="切换中英文">EN</button>
           <button id="videoBtn" type="button">播放影片</button>
+          <button id="posterBtn" type="button">查看海报</button>
           <button id="fullscreenBtn" type="button">全屏</button>
           <button id="printBtn" type="button">导出PDF</button>
           <div class="counter" id="counter">1 / 12</div>
@@ -76,6 +77,16 @@
         </div>
       </div>
     </div>
-    <script src="./script.js?v=20260428-uifix-4"></script>
+    <div class="poster-modal" id="posterModal" hidden>
+      <div class="poster-backdrop" id="posterBackdrop"></div>
+      <div class="poster-panel" role="dialog" aria-modal="true" aria-labelledby="posterTitle">
+        <div class="poster-head">
+          <h3 id="posterTitle">项目海报</h3>
+          <button id="closePosterBtn" type="button" aria-label="关闭海报">关闭</button>
+        </div>
+        <img id="posterImage" src="./assets/poster.png" alt="CircaGuard 项目海报" />
+      </div>
+    </div>
+    <script src="./script.js?v=20260429-poster-1"></script>
   </body>
 </html>

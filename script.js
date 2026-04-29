@@ -11,6 +11,7 @@ const langBtn = document.getElementById("langBtn");
 const voiceBtn = document.getElementById("voiceBtn");
 const voiceSettingsBtn = document.getElementById("voiceSettingsBtn");
 const videoBtn = document.getElementById("videoBtn");
+const posterBtn = document.getElementById("posterBtn");
 const videoModal = document.getElementById("videoModal");
 const videoBackdrop = document.getElementById("videoBackdrop");
 const closeVideoBtn = document.getElementById("closeVideoBtn");
@@ -31,6 +32,10 @@ const enVoiceSelect = document.getElementById("enVoiceSelect");
 const previewVoiceBtn = document.getElementById("previewVoiceBtn");
 const resetVoiceBtn = document.getElementById("resetVoiceBtn");
 const voiceTip = document.getElementById("voiceTip");
+const posterModal = document.getElementById("posterModal");
+const posterBackdrop = document.getElementById("posterBackdrop");
+const closePosterBtn = document.getElementById("closePosterBtn");
+const posterTitle = document.getElementById("posterTitle");
 
 const deckContent = {
   zh: {
@@ -40,8 +45,11 @@ const deckContent = {
       fullscreen: "全屏",
       print: "导出PDF",
       video: "播放影片",
+      poster: "查看海报",
       closeVideo: "关闭",
       videoTitle: "项目影片",
+      closePoster: "关闭",
+      posterTitle: "项目海报",
       voiceSettings: "语音设置",
       closeVoice: "关闭",
       voiceSettingsTitle: "语音设置",
@@ -262,8 +270,11 @@ const deckContent = {
       fullscreen: "Fullscreen",
       print: "Export PDF",
       video: "Play Video",
+      poster: "View Poster",
       closeVideo: "Close",
       videoTitle: "Project Video",
+      closePoster: "Close",
+      posterTitle: "Project Poster",
       voiceSettings: "Voice Settings",
       closeVoice: "Close",
       voiceSettingsTitle: "Voice Settings",
@@ -667,8 +678,11 @@ function mountSlides() {
   fullscreenBtn.textContent = content.nav.fullscreen;
   printBtn.textContent = content.nav.print;
   videoBtn.textContent = content.nav.video;
+  posterBtn.textContent = content.nav.poster;
   closeVideoBtn.textContent = content.nav.closeVideo;
   videoTitle.textContent = content.nav.videoTitle;
+  closePosterBtn.textContent = content.nav.closePoster;
+  posterTitle.textContent = content.nav.posterTitle;
   voiceSettingsBtn.textContent = content.nav.voiceSettings;
   closeVoiceBtn.textContent = content.nav.closeVoice;
   voiceTitle.textContent = content.nav.voiceSettingsTitle;
@@ -787,12 +801,24 @@ videoBtn.addEventListener("click", () => {
   openVideoModal();
 });
 
+posterBtn.addEventListener("click", () => {
+  openPosterModal();
+});
+
 closeVideoBtn.addEventListener("click", () => {
   closeVideoModal();
 });
 
 videoBackdrop.addEventListener("click", () => {
   closeVideoModal();
+});
+
+closePosterBtn.addEventListener("click", () => {
+  closePosterModal();
+});
+
+posterBackdrop.addEventListener("click", () => {
+  closePosterModal();
 });
 
 if (projectVideo.tagName === "VIDEO") {
@@ -856,7 +882,7 @@ printBtn.addEventListener("click", () => {
 });
 
 window.addEventListener("keydown", (event) => {
-  if ((isVideoModalOpen() || isVoiceModalOpen()) && event.key !== "Escape") return;
+  if ((isVideoModalOpen() || isVoiceModalOpen() || isPosterModalOpen()) && event.key !== "Escape") return;
   if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") {
     event.preventDefault();
     go(1);
@@ -891,6 +917,9 @@ window.addEventListener("keydown", (event) => {
   } else if (event.key === "Escape" && isVoiceModalOpen()) {
     event.preventDefault();
     closeVoiceModal();
+  } else if (event.key === "Escape" && isPosterModalOpen()) {
+    event.preventDefault();
+    closePosterModal();
   } else if (event.key === "Escape" && !pageJumpPanel.hasAttribute("hidden")) {
     event.preventDefault();
     closePageJumpPanel();
@@ -1041,6 +1070,10 @@ function isVoiceModalOpen() {
   return !voiceModal.hasAttribute("hidden");
 }
 
+function isPosterModalOpen() {
+  return !posterModal.hasAttribute("hidden");
+}
+
 function openVideoModal() {
   stopNarration();
   videoModal.removeAttribute("hidden");
@@ -1076,6 +1109,20 @@ function closeVideoModal(options = {}) {
   window.setTimeout(() => {
     if (!videoModal.classList.contains("show")) {
       videoModal.setAttribute("hidden", "");
+    }
+  }, 180);
+}
+
+function openPosterModal() {
+  posterModal.removeAttribute("hidden");
+  requestAnimationFrame(() => posterModal.classList.add("show"));
+}
+
+function closePosterModal() {
+  posterModal.classList.remove("show");
+  window.setTimeout(() => {
+    if (!posterModal.classList.contains("show")) {
+      posterModal.setAttribute("hidden", "");
     }
   }, 180);
 }
