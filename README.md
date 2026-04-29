@@ -1,5 +1,11 @@
 # CircaGuard - Adolescent Rhythm System
 
+## 在线访问 | Online Access
+
+- [https://jjjjiris.github.io/CircaGuard/](https://jjjjiris.github.io/CircaGuard/)
+- PPT在线观看链接（内包含语音讲解）
+- PPT Online Viewing Link (with Audio Narration Included)
+
 ## 项目核心标题 | Core Title
 
 - 中文标题：CircaGuard——青少年节律系统
@@ -11,11 +17,11 @@
 
 ### 中文
 
-CircaGuard 是一个面向青少年的生物节律睡眠干预系统。项目以“感知-分析-干预-反馈”闭环为核心，整合 APP、可穿戴数据与光环境传感，在家庭卧室与学校教室双场景中动态调节光照策略，帮助用户减少节律偏移与睡眠拖延。我们将灯从单一照明设备升级为节律提示终端：其仿生荧光蘑菇机制可释放促进睡眠、辅助节律调整的生物光；同时 APP 作为数据与反馈中枢，推动系统从产品走向可持续的节律基础设施。
+CircaGuard 是一个面向青少年的生物节律睡眠干预系统。项目以“感知—分析—干预—反馈”闭环为核心，整合 APP、可穿戴数据与光环境传感，在家庭卧室与学校教室双场景中动态调节光照策略，帮助用户减少节律偏移与睡眠拖延。我们将灯从单一照明设备升级为节律提示终端：其仿生荧光蘑菇机制可释放促进睡眠、辅助节律调整的生物光；同时 APP 作为数据与反馈中枢，推动系统从产品走向可持续的节律基础设施。由居家蘑菇台灯、教室灯光群组与用户端软件构成。系统采集家庭与校园双场景数据并实时同步至 APP，生成个性化可视化节律分析，帮助青少年科学调节作息。系统化多场景互联互通，让科技于润物无声之间，悄然重塑青少年健康节律。
 
 ### English
 
-CircaGuard is a circadian-based sleep intervention system for adolescents. Built on a closed loop of sensing, analysis, intervention, and feedback, it integrates app logs, wearable data, and light-environment sensing to deliver adaptive lighting strategies across two connected scenarios: home bedrooms and school classrooms. The lamp is redesigned from a standalone device into a rhythm guidance interface: inspired by bioluminescent mushrooms, it emits sleep-supportive bio-light that helps regulate circadian timing. Meanwhile, the app functions as the data and feedback hub, moving the project from a single product toward sustainable circadian infrastructure.
+CircaGuard is a circadian-based sleep intervention system for adolescents. Built on a closed loop of sensing, analysis, intervention, and feedback, it integrates app logs, wearable data, and light-environment sensing to deliver adaptive lighting strategies across two connected scenarios: home bedrooms and school classrooms. The lamp is redesigned from a standalone device into a rhythm guidance interface: inspired by bioluminescent mushrooms, it emits sleep-supportive bio-light that helps regulate circadian timing. Meanwhile, the app functions as the data and feedback hub, moving the project from a single product toward sustainable circadian infrastructure. CircaGuard is an all-scenario rhythm health system for adolescents, consisting of home mushroom lamps, classroom lighting groups, and a mobile APP. It collects data from home and school, syncs to the APP in real time, and generates personalized visual rhythm analysis to help teens adjust their routines. Systematic multi-scene interconnection lets technology quietly reshape adolescents' healthy rhythm in an imperceptible way.
 
 ## 一句话介绍 | One-Line Pitch
 
