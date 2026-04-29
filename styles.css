@@ -828,6 +828,33 @@ button:disabled {
   background: rgba(7, 12, 22, 0.8);
 }
 
+.poster-fallback {
+  margin-top: 8px;
+  border: 1px solid rgba(138, 188, 255, 0.28);
+  border-radius: 12px;
+  padding: 16px;
+  background: rgba(8, 16, 30, 0.82);
+  color: #dbe9ff;
+}
+
+.poster-fallback h4 {
+  margin: 0 0 10px;
+  font-size: clamp(1rem, 1.9vw, 1.18rem);
+}
+
+.poster-fallback p {
+  margin: 0;
+  line-height: 1.65;
+  color: #b8c8e8;
+}
+
+.poster-fallback code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  font-size: 0.92em;
+  color: #9cd5ff;
+}
+
 @media (min-width: 1500px) {
   .slide {
     padding: clamp(34px, 4vw, 68px);

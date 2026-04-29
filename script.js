@@ -36,6 +36,10 @@ const posterModal = document.getElementById("posterModal");
 const posterBackdrop = document.getElementById("posterBackdrop");
 const closePosterBtn = document.getElementById("closePosterBtn");
 const posterTitle = document.getElementById("posterTitle");
+const posterImage = document.getElementById("posterImage");
+const posterFallback = document.getElementById("posterFallback");
+const posterFallbackTitle = document.getElementById("posterFallbackTitle");
+const posterFallbackBody = document.getElementById("posterFallbackBody");
 
 const deckContent = {
   zh: {
@@ -50,6 +54,9 @@ const deckContent = {
       videoTitle: "项目影片",
       closePoster: "关闭",
       posterTitle: "项目海报",
+      posterMissingTitle: "海报图片未找到",
+      posterMissingBody:
+        "当前未检测到 assets/poster.png。你可以先查看文字版内容，或把海报图片放到该路径后自动显示。",
       voiceSettings: "语音设置",
       closeVoice: "关闭",
       voiceSettingsTitle: "语音设置",
@@ -275,6 +282,9 @@ const deckContent = {
       videoTitle: "Project Video",
       closePoster: "Close",
       posterTitle: "Project Poster",
+      posterMissingTitle: "Poster image not found",
+      posterMissingBody:
+        "Cannot find assets/poster.png yet. You can keep using the text version now, or place the poster image at that path to display it automatically.",
       voiceSettings: "Voice Settings",
       closeVoice: "Close",
       voiceSettingsTitle: "Voice Settings",
@@ -683,6 +693,9 @@ function mountSlides() {
   videoTitle.textContent = content.nav.videoTitle;
   closePosterBtn.textContent = content.nav.closePoster;
   posterTitle.textContent = content.nav.posterTitle;
+  posterFallbackTitle.textContent = content.nav.posterMissingTitle;
+  posterFallbackBody.textContent = content.nav.posterMissingBody;
+  syncPosterVisibility();
   voiceSettingsBtn.textContent = content.nav.voiceSettings;
   closeVoiceBtn.textContent = content.nav.closeVoice;
   voiceTitle.textContent = content.nav.voiceSettingsTitle;
@@ -1114,6 +1127,7 @@ function closeVideoModal(options = {}) {
 }
 
 function openPosterModal() {
+  syncPosterVisibility();
   posterModal.removeAttribute("hidden");
   requestAnimationFrame(() => posterModal.classList.add("show"));
 }
@@ -1125,6 +1139,28 @@ function closePosterModal() {
       posterModal.setAttribute("hidden", "");
     }
   }, 180);
+}
+
+function syncPosterVisibility() {
+  if (!posterImage || !posterFallback) return;
+  const isLoaded = posterImage.complete && posterImage.naturalWidth > 0;
+  if (isLoaded) {
+    posterImage.removeAttribute("hidden");
+    posterFallback.setAttribute("hidden", "");
+    return;
+  }
+  posterImage.setAttribute("hidden", "");
+  posterFallback.removeAttribute("hidden");
+}
+
+if (posterImage) {
+  posterImage.addEventListener("load", () => {
+    syncPosterVisibility();
+  });
+
+  posterImage.addEventListener("error", () => {
+    syncPosterVisibility();
+  });
 }
 
 function openVoiceModal() {

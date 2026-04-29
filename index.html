@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CircaGuard Web PPT</title>
-    <link rel="stylesheet" href="./styles.css?v=20260429-poster-1" />
+    <link rel="stylesheet" href="./styles.css?v=20260429-posterfix-1" />
   </head>
   <body>
     <div class="deck" id="deck">
@@ -85,8 +85,14 @@
           <button id="closePosterBtn" type="button" aria-label="关闭海报">关闭</button>
         </div>
         <img id="posterImage" src="./assets/poster.png" alt="CircaGuard 项目海报" />
+        <div id="posterFallback" class="poster-fallback" hidden>
+          <h4 id="posterFallbackTitle">海报图片未找到</h4>
+          <p id="posterFallbackBody">
+            当前未检测到 <code>assets/poster.png</code>。你可以先查看文字版内容，或把海报图片放到该路径后自动显示。
+          </p>
+        </div>
       </div>
     </div>
-    <script src="./script.js?v=20260429-poster-1"></script>
+    <script src="./script.js?v=20260429-posterfix-1"></script>
   </body>
 </html>
